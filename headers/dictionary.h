@@ -8,8 +8,8 @@
 #include "e_boolean.h"
 #include "pointers_type.h"
 
-typedef MapKey DicKey;
-typedef MapValue DicValue;
+typedef MapKey DictKey;
+typedef MapValue DictValue;
 
 typedef struct dictionary {
 	int size;
@@ -22,11 +22,11 @@ unsigned hash(int, int);
 
 void print_dict(Dictionary);
 
-Bool insert_to_dict(DicKey, DicValue, Dictionary);
+Bool insert_to_dict(DictKey, DictValue, Dictionary);
 
-Bool remove_from_dict(DicKey, Dictionary);
+void remove_from_dict(DictKey, Dictionary);
 
-Bool dict_has_key(DicKey, Dictionary);
+Bool dict_has_key(DictKey, Dictionary);
 
 void del_dict(Dictionary*);
 
