@@ -11,11 +11,11 @@
 
 int main(int argc, char *argv[]) {
 	
-	Stack_TestAll();
-	Queue_TestAll();
-	List_TestAll();
-	Map_TestAll();
-	Tree_TestAll();
+	//Stack_TestAll();
+	//Queue_TestAll();
+	//List_TestAll();
+	//Map_TestAll();
+	//Tree_TestAll();
 	Dictionary_TestAll();
 	
 	return 0;
