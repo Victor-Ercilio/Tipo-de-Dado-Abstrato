@@ -26,10 +26,12 @@ void insert_map(MapKey key, MapValue value, Map* map){
 }
 
 void print_map(Map map){
-	printf("[\n");
+	printf("[");
 	while(map != NULL){
-		printf("\t%d: %s\n", map->key, map->value);
+		printf("%d: %s", map->key, map->value);
 		map = map->next;
+		if(map != NULL)
+			printf(", ");
 	}
 	printf("]\n");
 }
