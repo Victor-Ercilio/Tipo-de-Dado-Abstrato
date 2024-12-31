@@ -26,3 +26,27 @@ void del_dict(Dictionary* dict){
 	*dict = NULL;
 	return;
 }
+
+unsigned hash(DictKey key, int size){
+	if(key < 0 || size <= 0){
+		return 0;
+	}
+	return key % size;
+}
+
+void print_dict(Dictionary dict){
+	printf("{");
+	int i;
+	for(i = 0; i < dict->size; i++){
+		printf("\n\t%02d: ", i);
+		print_map(dict->array[i]);
+		
+		if(i+1 == dict->size)
+			printf("\n");
+	}
+	printf("}\n");
+}
+
+Bool insert_to_dict(DictKey key, DictValue value, Dictionary dict){
+	
+}
