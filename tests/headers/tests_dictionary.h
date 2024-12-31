@@ -12,7 +12,11 @@ void Dict_SizeIsZero_ReturnsNull(void);
 
 void Dict_SizeIsPositiveValue_ReturnsDictionary(void);
 
-void Hash_TwoNotZeroPositiveValues_ReturnsRemainderOfTheFirstByTheSecond(void);
+void Hash_NegativeValues_ReturnsZero(void);
+
+void Hash_KeyIsPositiveAndSizeIsZero_ReturnsReturnsZero(void);
+
+void Hash_KeyAndSizeArePositiveNotZeroValues_ReturnsRemainderOfTheKeyByTheSize(void);
 
 void InsertToDict_DictIsNull_ReturnsFalse(void);
 
