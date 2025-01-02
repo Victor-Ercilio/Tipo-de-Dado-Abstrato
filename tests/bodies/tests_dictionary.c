@@ -28,6 +28,14 @@ void Dictionary_TestAll(void){
 		  Hash_KeyIsPositiveAndSizeIsZero_ReturnsReturnsZero, width);
 	test("Hash_KeyAndSizeArePositiveNotZeroValues_ReturnsRemainderOfTheKeyByTheSize", 
 		  Hash_KeyAndSizeArePositiveNotZeroValues_ReturnsRemainderOfTheKeyByTheSize, width);
+	
+	test("InsertToDict_DictIsNull_ReturnsFalse", 
+		  InsertToDict_DictIsNull_ReturnsFalse, width);
+	test("InsertToDict_DictIsEmpty_ReturnsTrue", 
+		  InsertToDict_DictIsEmpty_ReturnsTrue, width);
+	test("InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue", 
+		  InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue, width);
+
 	// test("", , width);
 }
 
@@ -102,6 +110,52 @@ void Hash_KeyAndSizeArePositiveNotZeroValues_ReturnsRemainderOfTheKeyByTheSize(v
 
 	assert(actual == expected);
 }
+
+void InsertToDict_DictIsNull_ReturnsFalse(void){
+	Dictionary actualDict = NULL;
+	Bool actualOperationResult;
+	Bool expectedOperationResult = False;
+	DictKey key = 0;
+	DictValue value = "abc";
+	
+	actualOperationResult = insert_to_dict(key, value, actualDict);
+	
+	assert(actualOperationResult == expectedOperationResult);
+}
+
+void InsertToDict_DictIsEmpty_ReturnsTrue(void){
+	Dictionary actualDict = dict(DICT_SIZE_POSITIVE);
+	Bool actualOperationResult;
+	Bool expectedOperationResult = True;
+	DictKey key = 0;
+	DictValue value = "abc";
+	
+	actualOperationResult = insert_to_dict(key, value, actualDict);
+	
+	assert(actualOperationResult == expectedOperationResult);
+	assert(actualDict->array[0]->key == key);
+	assert(strcmp(actualDict->array[0]->value, value) == 0);
+	del_dict(&actualDict);
+}
+
+
+void InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue(void){
+	Dictionary actualDict = dict(DICT_SIZE_POSITIVE);
+	Bool actualOperationResult;
+	Bool expectedOperationResult = True;
+	DictKey key = 0;
+	DictValue originalValue = "abc";
+	DictValue finalValue = "def";
+	insert_to_dict(key, originalValue, actualDict);
+	
+	actualOperationResult = insert_to_dict(key, finalValue, actualDict);
+	
+	assert(actualOperationResult == expectedOperationResult);
+	assert(actualDict->array[0]->key == key);
+	assert(strcmp(actualDict->array[0]->value, finalValue) == 0);
+	del_dict(&actualDict);
+}
+
 
 #undef DICT_SIZE_NEGATIVE
 #undef DICT_SIZE_ZERO
