@@ -48,5 +48,11 @@ void print_dict(Dictionary dict){
 }
 
 Bool insert_to_dict(DictKey key, DictValue value, Dictionary dict){
+	if(dict == NULL)
+		return False;
 	
+	int index = hash(key, dict->size);
+	
+	insert_map(key, value, &(dict->array[index]));
+	return True;
 }
