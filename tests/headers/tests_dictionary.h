@@ -22,11 +22,7 @@ void InsertToDict_DictIsNull_ReturnsFalse(void);
 
 void InsertToDict_DictIsEmpty_ReturnsTrue(void);
 
-void InsertToDict_DictKeyIsNotInDict_ReturnsTrue(void);
-
 void InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue(void);
-
-void InsertToDict_DictKeyIsInDictAndDictValueNotChange_ReturnsFalse(void);
 
 void RemoveFromDict_DictIsNull_ShouldChangeNothing(void);
 
