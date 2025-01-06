@@ -35,7 +35,16 @@ void Dictionary_TestAll(void){
 		  InsertToDict_DictIsEmpty_ReturnsTrue, width);
 	test("InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue", 
 		  InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue, width);
-
+	
+	
+	test("RemoveFromDict_DictIsNull_ShouldChangeNothing", 
+		  RemoveFromDict_DictIsNull_ShouldChangeNothing, width);
+	test("RemoveFromDict_DictIsEmpty_ShouldChangeNothing", 
+		  RemoveFromDict_DictIsEmpty_ShouldChangeNothing, width);
+	test("RemoveFromDict_DictKeyIsInDict_ShouldRemoveTheKey", 
+		  RemoveFromDict_DictKeyIsInDict_ShouldRemoveTheKey, width);
+	test("RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing", 
+		  RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing, width);
 	// test("", , width);
 }
 
@@ -138,7 +147,6 @@ void InsertToDict_DictIsEmpty_ReturnsTrue(void){
 	del_dict(&actualDict);
 }
 
-
 void InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldReplaceDictValue(void){
 	Dictionary actualDict = dict(DICT_SIZE_POSITIVE);
 	Bool actualOperationResult;
@@ -156,6 +164,49 @@ void InsertToDict_DictKeyIsInDictAndDictValueIsDifferent_ReturnsTrueAndShouldRep
 	del_dict(&actualDict);
 }
 
+void RemoveFromDict_DictIsNull_ShouldChangeNothing(void){
+	Dictionary actual = NULL;
+	Dictionary expected = NULL;
+	
+	remove_from_dict(0, actual);
+	
+	assert(actual == expected);
+}
+
+void RemoveFromDict_DictIsEmpty_ShouldChangeNothing(void){
+	Dictionary actual = dict(DICT_SIZE_POSITIVE);
+	
+	remove_from_dict(0, actual);
+	
+	assert(actual->array[0] == NULL);
+	del_dict(&actual);
+}
+
+void RemoveFromDict_DictKeyIsInDict_ShouldRemoveTheKey(void){
+	Dictionary actual = dict(DICT_SIZE_POSITIVE);
+	DictKey key = 0;
+	DictValue value = "abc";
+	insert_to_dict(key, value, actual);
+	
+	remove_from_dict(key, actual);
+	
+	assert(actual->array[0] == NULL);
+	del_dict(&actual);
+}
+
+void RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing(void){
+	Dictionary actual = dict(DICT_SIZE_POSITIVE);
+	DictKey key = 0;
+	DictValue value = "abc";
+	insert_to_dict(key, value, actual);
+	
+	remove_from_dict(key+1, actual);
+	
+	assert(actual->array[0] != NULL);
+	assert(actual->array[0]->key == key);
+	assert(strcmp(actual->array[0]->value, value) == 0);
+	del_dict(&actual);
+}
 
 #undef DICT_SIZE_NEGATIVE
 #undef DICT_SIZE_ZERO
