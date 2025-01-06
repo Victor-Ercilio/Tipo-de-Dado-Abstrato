@@ -64,3 +64,12 @@ void remove_from_dict(DictKey key, Dictionary dict){
 	
 	remove_from_map(key, &(dict->array[index]));
 }
+
+Bool dict_has_key(DictKey key, Dictionary dict){
+	if(dict == NULL) return False;
+	DictValue v;
+	
+	int index = hash(key, dict->size);
+	
+	return has_key_map(key, v, dict->array[index]);
+}
