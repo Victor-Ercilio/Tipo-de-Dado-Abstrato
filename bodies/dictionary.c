@@ -56,3 +56,11 @@ Bool insert_to_dict(DictKey key, DictValue value, Dictionary dict){
 	insert_map(key, value, &(dict->array[index]));
 	return True;
 }
+
+void remove_from_dict(DictKey key, Dictionary dict){
+	if(dict == NULL) return;
+	
+	int index = hash(key, dict->size);
+	
+	remove_from_map(key, &(dict->array[index]));
+}
