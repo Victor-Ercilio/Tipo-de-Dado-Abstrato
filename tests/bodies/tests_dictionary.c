@@ -45,6 +45,13 @@ void Dictionary_TestAll(void){
 		  RemoveFromDict_DictKeyIsInDict_ShouldRemoveTheKey, width);
 	test("RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing", 
 		  RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing, width);
+	
+	test("DictHasKey_DictIsNUll_ReturnsFalse", 
+		  DictHasKey_DictIsNUll_ReturnsFalse, width);
+	test("DictHasKey_DictKeyIsInDict_ReturnsTrue", 
+	 	  DictHasKey_DictKeyIsInDict_ReturnsTrue, width);
+	test("DictHasKey_DictKeyIsNotInDict_ReturnsFalse", 
+		  DictHasKey_DictKeyIsNotInDict_ReturnsFalse, width);
 	// test("", , width);
 }
 
@@ -208,6 +215,43 @@ void RemoveFromDict_DictKeyIsNotInDict_ShouldChangeNothing(void){
 	del_dict(&actual);
 }
 
+void DictHasKey_DictIsNUll_ReturnsFalse (void){
+	Dictionary D = NULL;
+	Bool actual;
+	Bool expected = False;
+	
+	actual = dict_has_key(0, D);
+	
+	assert(actual == expected);
+}
+
+void DictHasKey_DictKeyIsInDict_ReturnsTrue (void){
+	Dictionary D = dict(DICT_SIZE_POSITIVE);
+	DictKey key = 0;
+	DictValue value = "abc";
+	insert_to_dict(key, value, D);
+	Bool actual;
+	Bool expected = True;
+	
+	actual = dict_has_key(key, D);
+	
+	assert(actual == expected);
+	del_dict(&D);
+}
+
+void DictHasKey_DictKeyIsNotInDict_ReturnsFalse (void){
+	Dictionary D = dict(DICT_SIZE_POSITIVE);
+	DictKey key = 0;
+	DictValue value = "abc";
+	insert_to_dict(key, value, D);
+	Bool actual;
+	Bool expected = False;
+	
+	actual = dict_has_key(key+1, D);
+	
+	assert(actual == expected);
+	del_dict(&D);
+}
 #undef DICT_SIZE_NEGATIVE
 #undef DICT_SIZE_ZERO
 #undef DICT_SIZE_POSITIVE
